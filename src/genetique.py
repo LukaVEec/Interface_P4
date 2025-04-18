@@ -128,12 +128,12 @@ def genetic_algorithm(P, J, C, edges, generations=200, pop_size=100):
     best_cost = scores[0]
 
     # Affichage de l'évolution
-    #plt.plot(best_scores)
-    #plt.title("Évolution du coût au fil des générations")
-    #plt.xlabel("Génération")
-    #plt.ylabel("Coût")
-    #plt.grid()
-    #plt.show()
+    plt.plot(best_scores)
+    plt.title("Évolution du coût au fil des générations")
+    plt.xlabel("Génération")
+    plt.ylabel("Coût")
+    plt.grid()
+    plt.show()
     return best_cost, best, best_scores
 
 

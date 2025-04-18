@@ -80,6 +80,22 @@ Version alternative de l’algorithme génétique avec la librairie `pygad`.
 
 > ❌ **Non utilisée** dans la version finale.
 
+### `OBJ_A.py`
+Fichier contenant les codes pour l'analyse de l'objectif A. 
+
+**Nécessite :** `pyomo`, solver `glpk``
+
+### `objectif_b.py`
+
+Contient les fichiers pour l'analyse de l'objectif B.
+
+**Nécessite :** `ndlib``
+
+### `Objectif C`
+
+Robustesse_analyse, robustesse_guer et robustesse_prev contient les fichiers pour l'analyse de l'objectif C. 
+
+
 ---
 
 ## ✈️ Création d’un nouveau réseau aérien
