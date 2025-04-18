@@ -41,6 +41,5 @@ def plot_network(G, airports_csv="airports.csv"):
     return fig
 
 
-G, edges = data_processing.data_processing("files/airports.csv", "files/pre_existing_routes.csv")
 
 

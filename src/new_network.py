@@ -19,7 +19,7 @@ def new_network(airports, pre_existing_routes, wanted_journeys, C):
     G, edges = data_processing.data_processing(airports, pre_existing_routes)
     P = []
     for start, end in edges.keys():
-        P.append((start, end, edges[(start, end)]))
+        P.append((start, end))
 
     wanted_routes = pd.read_csv(wanted_journeys)
     pairs = []
@@ -27,9 +27,8 @@ def new_network(airports, pre_existing_routes, wanted_journeys, C):
         start, end = row["ID_start"], row["ID_end"]
         pairs.append((start, end))
     
-    print("Paires à lier :", pairs)
 
-    best_cost, selected_edges = genetique.genetic_algorithm(P, pairs, C, edges, generations=200, population_size=100)
+    best_cost, selected_edges, _ = genetique.genetic_algorithm(P, pairs, C, edges, generations=200, pop_size=100)
     
     # Création d'un fichier new_routes.csv avec les arêtes retenues
     with open("files/new_routes.csv", "w") as f:
