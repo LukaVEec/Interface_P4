@@ -22,6 +22,17 @@ def generate_unique_pairs(nodes, number_of_pairs, directed=True):
 
 
 def prevenir(pairs, C, edges, alpha, J_prior, path_prior):
+    """
+    Arguments :
+    - pairs : liste de paires d'aéroports à relier
+    - C : constante reflétant l'importance donnée à un réseau à peu de connexions entre aéroports
+    - edges : ensemble des connexions entre aéroports possibles
+    - alpha : constante reflétant l'importance donnée à un réseau robuste
+    - J_prior, path_prior : ensemble des connexions J_prior entre aéroports à relier avec au minimum path_prior chemins distincts
+
+    Retourne :
+    - cout : coût de la fonction objectif
+    """
     P = []
     for start, end in edges.keys():
         P.append((start, end))
@@ -55,6 +66,18 @@ def prevenir(pairs, C, edges, alpha, J_prior, path_prior):
     return cout
 
 def guerir(pairs, C, edges, removed_edges, removed_nodes):
+    """
+    Arguments :
+    - pairs : liste de paires d'aéroports à relier
+    - C : constante reflétant l'importance donnée à un réseau à peu de connexions entre aéroports
+    - edges : ensemble des connexions entre aéroports possibles
+    - removed_edges : pourcentage des arêtes perturbées
+    - removed_nodes : pourcentage des nodes retirés
+
+    Retourne :
+    - cout_bef : coût de la fonction objectif sans perturbation
+    - cout_aft : coût supplémentaire de la fonction objectif après adaptation aux perturbations
+    """
     P = []
     for start, end in edges.keys():
         P.append((start, end))
