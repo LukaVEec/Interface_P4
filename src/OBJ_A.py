@@ -3,7 +3,7 @@ import networkx as nx
 from pyomo.environ import *
 import matplotlib.pyplot as plt
 import numpy as np
-from  src.distance import distance
+from  distance import distance
 
 
 ############    STEP 1 : Create the DIRECTED GRAPH
