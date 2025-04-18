@@ -78,7 +78,7 @@ def tournament_selection(population, scores, k=5):
     return selected[0][0]
 
 
-def genetic_algorithm(P, J, C, edges, kept, generations=10, pop_size=20):
+def genetic_algorithm(P, J, C, edges, kept, generations=20, pop_size=300):
     """
     Algorithme génétique pour optimiser le réseau de routes (individus = liste d'arêtes).
     """

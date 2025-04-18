@@ -37,9 +37,8 @@ Notre solution s’appuie sur :
     ├── robustesse_analyse.py
     ├── robustesse_guer.py
     ├── robustesse_prev.py
+    ├── robustesse.py
     ├── test_opti.py
-    ├── test_rob_guer.py
-    └── test_rob_prev.py
 ```
 
 ---
