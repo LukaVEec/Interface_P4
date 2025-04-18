@@ -1,136 +1,156 @@
-# Projet LEPL1507 Groupe 2
-## Structure du projet
+
+# ✈️ Projet LEPL1507 — Groupe 2
+
+Bienvenue dans notre projet de modélisation d’un **réseau aérien**, développé dans le cadre du cours **LEPL1507**.  
+Notre solution s’appuie sur :
+
+
+
+---
+
+## 📁 Structure du projet
 
 ```
 ├── README.md
-├── Recommandations.py
-├── Recommandations_test.py
+├── requirements.txt
 ├── SIR_mine.py
-├── files
+├── SIR_probability.py
+├── files/
 │   ├── airports.csv
 │   ├── capacities_airports.csv
 │   ├── capacities_connexions.csv
 │   ├── pre_existing_routes.csv
 │   ├── prices.csv
-│   ├── simulation_plots
-│   ├── test_airports.csv
 │   └── waiting_times.csv
-├── objectif_B.py
-├── robustesse.py
-└── src
+└── src/
+    ├── OBJ_A.py
     ├── benchmark.py
     ├── data_processing.py
     ├── distance.py
     ├── genetique.py
     ├── interface.py
     ├── new_network.py
+    ├── objectif_B.py
     ├── optimisation.py
     ├── plot_network.py
-    ├── test_objectif1.py
-    └── test_pygad.py
+    ├── pygad_library.py
+    ├── robustesse_analyse.py
+    ├── robustesse_guer.py
+    ├── robustesse_prev.py
+    ├── test_opti.py
+    ├── test_rob_guer.py
+    └── test_rob_prev.py
 ```
 
-### genetique.py 
+---
 
-Contient toutes les fonctions nécessaires pour l'algorithme génétique. 
+## Modules clés
 
+### `genetique.py`
+Contient toutes les fonctions nécessaires à l’**algorithme génétique** utilisé pour l'optimisation du réseau.
 
-### distance.py
-Contient la fonction distance qui calcule la distance entre 2 points sur la carte
+### `distance.py`
+Fonction utilitaire pour calculer la distance entre deux points géographiques.
 
-### optimisation.py
-Résolution de l'objectif 1 via un solver d'optimisation, nécessite:
-- pyomo
-- un solver d'optimisation (ex: cbc, scip, gurobi,...)
+### `optimisation.py`
+Permet de résoudre l’**objectif A** à l’aide de solveurs d’optimisation via **Pyomo**.
 
-Il n'est pas nécessaire dans la résolution finale de **new_network**
+> ⚠️ Ce module n’est pas requis pour la version finale du projet utilisant `new_network.py`.
 
-### plot_network.py
-Permet d'afficher le réseau sur une carte du monde. 
+### `plot_network.py`
+Affiche le réseau aérien sur une carte du monde avec `cartopy`.
 
-Arguments :
-- G : graphe networkx du réseau
-- airports.csv : csv contenant les informations des aéroports
+**Arguments :**
+- Graphe NetworkX
+- Fichier `airports.csv`
 
-Nécessite:
-- cartopy
+### `interface.py`
+Crée une **interface visuelle avec Streamlit** pour l’interaction avec le réseau.
 
-### interface.py
+**Nécessite :** `streamlit`, `cartopy`
 
-Code pour l'interface streamlite.
+### `data_processing.py`
+Transforme les fichiers du projet en un **graphe NetworkX** utilisable.
 
-Nécessite :
-- streamlite
-- cartopy
+**Utilise :**
+- `airports.csv`
+- `pre_existing_routes.csv`
 
-### data_processing.py
+### `pygad_library.py`
+Version alternative de l’algorithme génétique avec la librairie `pygad`.
 
-Crée un graphe networkx à partir des fichiers du projet.
+> ❌ **Non utilisée** dans la version finale.
 
-**Arguments:**
-- airports.csv
-- pre_existing_routes.csv
+---
 
-### pygad_library.py
+## ✈️ Création d’un nouveau réseau aérien
 
-Implémentation de l'algorithme génétique utilisant la librairie pygad. Encore une fois cette implémentation n'étant pas celle retenue, il n'est pas nécessaire pour le projet.
+Le fichier principal de la fontion est :
+```python
+src/new_network.py
+```
 
-## Nouveau réseau aérien
+### 🧰 Librairies nécessaires
 
-### Librairies nécessaires
+- `numpy`
+- `pandas`
+- `networkx`
 
-La fonction pour créer le nouveau réseau aérien se situe dans le fichier new_network.py. Afin d'utiliser cette fonction il faut posséder certaines librairies.
-- numpy
-- pandas
-- networkx
+📦 Installez-les via :
 
-Ce sont des librairies assez basiques mais si vous ne les possédez pas il faut tout simplement taper cette commande
+```bash
+pip install numpy pandas networkx
+# ou
+conda install numpy pandas networkx
+```
 
+### ▶️ Exécution d'un test
 
-````
+```bash
+python main.py 
+```
+
+Il suffit de changer les arguments dans la fonction du fichier pour mettre vos paramètres.
+
+---
+
+## 🖥️ Interface de recommandation de vols
+
+### ⚙️ Librairies nécessaires
+
+- `pandas`
+- `networkx`
+- `matplotlib`
+- `cartopy`
+- `numpy`
+- `streamlit`
+
+💡 Installation :
+
+```bash
 pip install <library>
-`````
-ou si vous utilisez anaconda:
-`````
+# ou
 conda install <library>
-``````
+```
 
-Maintenant pour exécuter cette fonction il faut tout simplement taper cette commande:
-`````
-python main.py <airports.csv> <pre_existing_routes.csv> <wanted_journeys.csv> <C>
-`````
+### 🚀 Lancer l’interface Streamlit
 
-## Interface de recommandations de vols
-
-### Librairies nécessaires
-
-- pandas 
-- networkx
-- matplotlib
-- cartopy
-- numpy
-- streamlit
-
-Streamlit permet d'avoir une interface facile et visuelle et cartopy nous permet de tracer les vols sur une carte. Encore une fois les installations sont les mêmes pour toutes les libraires : 
-
-`````
-pip install <library>
-``````
-ou 
-`````
-conda install <library>
-``````
-
-### Lancement de l'interface
-
-Afin de lancer l'interface il suffit de faire :
-`````
+```bash
 streamlit run src/interface.py
-``````
-Cela lancera l'interface avec les aéroports et tous les vols possibles qui nous ont été donnés lors du projet. 
+```
 
-**Attention l'interface se lancera dans votre navigateur, il faudra donc peut-être confirmer l'autorisation de streamlit pour utiliser votre navigateur.** 
+Cela ouvrira automatiquement l’interface dans votre navigateur 🌐
 
-***Si vous désirez simplement accéder à l'interface utilisant les données de base sans passer par la librairie vous pouvez le faire via ce lien :***
+> ⚠️ Vous devrez peut-être autoriser Streamlit à accéder à votre navigateur.
 
-https://lepl1507g02.streamlit.app
+---
+
+### 🌍 Démo en ligne (données de base)
+
+**Vous pouvez directement cliquer sur ce lien pour tester l'interface avec les données fournies du projet sans devoir installer streamlit:**  
+👉 [https://lepl1507g02.streamlit.app](https://lepl1507g02.streamlit.app)
+
+---
+
+
+
