@@ -130,4 +130,7 @@ streamlit run src/interface.py
 Cela lancera l'interface avec les aéroports et tous les vols possibles qui nous ont été donnés lors du projet. 
 
 **Attention l'interface se lancera dans votre navigateur, il faudra donc peut-être confirmer l'autorisation de streamlit pour utiliser votre navigateur.** 
-# Interface_P4
+
+***Si vous désirez simplement accéder à l'interface utilisant les données de base sans passer par la librairie vous pouvez le faire via ce lien :***
+
+https://lepl1507g02.streamlit.app
