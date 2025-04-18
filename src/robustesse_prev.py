@@ -11,7 +11,7 @@ def evaluate(solution, J, C, P, alpha, J_prior, path_prior, penalty=1e6):
     """
     Évaluation d'une solution avec Dijkstra par source,
     pénalisation locale pour les trajets impossibles.
-    AJout de pénalisations en vue de garantir une certaine
+    Ajout de pénalisations en vue de garantir une certaine
     robustesse.
     """
     G = nx.DiGraph([(start, end, {"weight": P[(start, end)]}) for start, end in solution])
@@ -104,7 +104,7 @@ def tournament_selection(population, scores, k=5):
     return selected[0][0]
 
 
-def genetic_algorithm(P, J, C, edges, alpha, J_prior, path_prior, generations=30, pop_size=200):
+def genetic_algorithm(P, J, C, edges, alpha, J_prior, path_prior, generations=100, pop_size=200):
     """
     Algorithme génétique pour optimiser le réseau de routes (individus = liste d'arêtes).
     """

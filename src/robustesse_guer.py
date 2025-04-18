@@ -9,36 +9,45 @@ import optimisation as optimisation
 
 def evaluate(solution, J, C, P, kept, penalty=1e6):
     """
-    Évaluation d'une solution avec Dijkstra par source,
-    pénalisation locale pour les trajets impossibles.
-    AJout de pénalisations en vue de garantir une certaine
-    robustesse.
+    Évaluation d'une solution avec Dijkstra par source
+    avec une solution de départ à la quelle on a retiré 
+    un certain nombre d'arête, pénalisation locale pour 
+    les trajets impossibles.
     """
-    G = nx.DiGraph([(start, end, {"weight": P[(start, end)]}) for start, end in solution] + [(start, end, {"weight": P[(start, end)]}) for start, end in kept])
+    G = nx.DiGraph([(start, end, {"weight": P[(start, end)]}) for start, end in solution + kept])
+    G_kept = nx.DiGraph([(start, end, {"weight": P[(start, end)]}) for start, end in kept])
     penalty_cost = 0
 
     # Construction des chemins les plus courts par source, avec gestion d'échec
     shortest_paths = {}
+    shortest_paths_kept = {}
     for src in {s for s, _ in J}:
         try:
             shortest_paths[src] = nx.single_source_dijkstra_path_length(G, src, weight='weight')
         except:
             shortest_paths[src] = {}  # Aucun chemin atteignable depuis cette source
+        try:
+            shortest_paths_kept[src] = nx.single_source_dijkstra_path_length(G_kept, src, weight='weight')
+        except:
+            shortest_paths_kept[src] = {}  # Aucun chemin atteignable depuis cette source
 
     # Évaluation cumulée
     total_distance = 0
+    total_distance_kept = 0
     for src, dest in J:
         if dest in shortest_paths.get(src, {}):
             total_distance += shortest_paths[src][dest]
         else:
             penalty_cost += penalty  # pénalisation du trajet manquant
+        if dest in shortest_paths_kept.get(src, {}):
+            total_distance_kept += shortest_paths_kept[src][dest]
 
 
-    return total_distance / len(J) + C * (len(solution)+len(kept)) + penalty_cost
+    return (total_distance - total_distance_kept) / len(J) + C * (len(solution)) + penalty_cost
 
 
 def generate_initial_population(pop_size, P):
-    return [random.sample(P, random.randint(len(P)//4, len(P))) for i in range(pop_size)]
+    return [random.sample(P, random.randint(0, len(P)-len(P)//4)) for i in range(pop_size)]
 
 
 def crossover(parent1, parent2):
@@ -78,7 +87,7 @@ def tournament_selection(population, scores, k=5):
     return selected[0][0]
 
 
-def genetic_algorithm(P, J, C, edges, kept, generations=20, pop_size=300):
+def genetic_algorithm(P, J, C, edges, kept, generations=100, pop_size=200):
     """
     Algorithme génétique pour optimiser le réseau de routes (individus = liste d'arêtes).
     """

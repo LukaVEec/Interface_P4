@@ -1,14 +1,8 @@
 
-# ✈️ Projet LEPL1507 — Groupe 2
-
-Bienvenue dans notre projet de modélisation d’un **réseau aérien**, développé dans le cadre du cours **LEPL1507**.  
-Notre solution s’appuie sur :
+# Projet LEPL1507 — Groupe 2
 
 
-
----
-
-## 📁 Structure du projet
+## Structure du projet
 
 ```
 ├── README.md
@@ -46,15 +40,15 @@ Notre solution s’appuie sur :
 ## Modules clés
 
 ### `genetique.py`
-Contient toutes les fonctions nécessaires à l’**algorithme génétique** utilisé pour l'optimisation du réseau.
+Contient toutes les fonctions nécessaires à l’algorithme génétique utilisé pour l'optimisation du réseau.
 
 ### `distance.py`
 Fonction utilitaire pour calculer la distance entre deux points géographiques.
 
 ### `optimisation.py`
-Permet de résoudre l’**objectif A** à l’aide de solveurs d’optimisation via **Pyomo**.
+Permet de résoudre l'objectif A à l’aide de solveurs d’optimisation via Pyomo.
 
-> ⚠️ Ce module n’est pas requis pour la version finale du projet utilisant `new_network.py`.
+> Ce module n’est pas requis pour la version finale du projet utilisant `new_network.py`.
 
 ### `plot_network.py`
 Affiche le réseau aérien sur une carte du monde avec `cartopy`.
@@ -64,12 +58,12 @@ Affiche le réseau aérien sur une carte du monde avec `cartopy`.
 - Fichier `airports.csv`
 
 ### `interface.py`
-Crée une **interface visuelle avec Streamlit** pour l’interaction avec le réseau.
+Crée une interface visuelle avec Streamlit pour l’interaction avec le réseau.
 
 **Nécessite :** `streamlit`, `cartopy`
 
 ### `data_processing.py`
-Transforme les fichiers du projet en un **graphe NetworkX** utilisable.
+Transforme les fichiers du projet en un graphe NetworkX utilisable.
 
 **Utilise :**
 - `airports.csv`
@@ -78,7 +72,7 @@ Transforme les fichiers du projet en un **graphe NetworkX** utilisable.
 ### `pygad_library.py`
 Version alternative de l’algorithme génétique avec la librairie `pygad`.
 
-> ❌ **Non utilisée** dans la version finale.
+> Non utilisé dans la version finale.
 
 ### `OBJ_A.py`
 Fichier contenant les codes pour l'analyse de l'objectif A. 
@@ -93,25 +87,25 @@ Contient les fichiers pour l'analyse de l'objectif B.
 
 ### `Objectif C`
 
-Robustesse_analyse, robustesse_guer et robustesse_prev contient les fichiers pour l'analyse de l'objectif C. 
+robustesse, robustesse_guer et robustesse_prev contient les fichiers pour l'analyse de l'objectif C
 
 
 ---
 
-## ✈️ Création d’un nouveau réseau aérien
+## Création d’un nouveau réseau aérien
 
 Le fichier principal de la fontion est :
 ```python
 src/new_network.py
 ```
 
-### 🧰 Librairies nécessaires
+### Librairies nécessaires
 
 - `numpy`
 - `pandas`
 - `networkx`
 
-📦 Installez-les via :
+Installation :
 
 ```bash
 pip install numpy pandas networkx
@@ -119,7 +113,7 @@ pip install numpy pandas networkx
 conda install numpy pandas networkx
 ```
 
-### ▶️ Exécution d'un test
+### Exécution d'un test
 
 ```bash
 python main.py 
@@ -129,9 +123,9 @@ Il suffit de changer les arguments dans la fonction du fichier pour mettre vos p
 
 ---
 
-## 🖥️ Interface de recommandation de vols
+## Interface de recommandation de vols
 
-### ⚙️ Librairies nécessaires
+### Librairies nécessaires
 
 - `pandas`
 - `networkx`
@@ -140,7 +134,7 @@ Il suffit de changer les arguments dans la fonction du fichier pour mettre vos p
 - `numpy`
 - `streamlit`
 
-💡 Installation :
+Installation :
 
 ```bash
 pip install <library>
@@ -148,24 +142,19 @@ pip install <library>
 conda install <library>
 ```
 
-### 🚀 Lancer l’interface Streamlit
+### Lancer l’interface Streamlit
 
 ```bash
 streamlit run src/interface.py
 ```
 
-Cela ouvrira automatiquement l’interface dans votre navigateur 🌐
+Cela ouvrira automatiquement l’interface dans votre navigateur
 
-> ⚠️ Vous devrez peut-être autoriser Streamlit à accéder à votre navigateur.
+> Vous devrez peut-être autoriser Streamlit à accéder à votre navigateur.
 
 ---
 
-### 🌍 Démo en ligne (données de base)
+### Démo en ligne (données de base)
 
 **Vous pouvez directement cliquer sur ce lien pour tester l'interface avec les données fournies du projet sans devoir installer streamlit:**  
-👉 [https://lepl1507g02.streamlit.app](https://lepl1507g02.streamlit.app)
-
----
-
-
-
+https://lepl1507g02.streamlit.app](https://lepl1507g02.streamlit.app)

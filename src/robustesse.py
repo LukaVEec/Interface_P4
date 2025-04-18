@@ -89,6 +89,7 @@ def guerir(pairs, C, edges, removed_edges, removed_nodes):
         if u not in nodes_J: nodes_used.add(u)
         if v not in nodes_J: nodes_used.add(v)
     nodes_to_remove = random.choices(list(nodes_used), k=int(removed_nodes * len(nodes_used)))
+
     kept = []
     for i in range(len(kept_temp)):
         u, v = kept_temp[i]
@@ -100,7 +101,7 @@ def guerir(pairs, C, edges, removed_edges, removed_nodes):
             P.remove(elem)
 
     cost_aft,best_aft,_ = robustesse_guer.genetic_algorithm(Pcopy, pairs, C, edges, kept)
-    G_aft = nx.DiGraph([(start, end, {"weight": edges[(start, end)]}) for start, end in best_aft])
+    G_aft = nx.DiGraph([(start, end, {"weight": edges[(start, end)]}) for start, end in best_aft + kept])
 
     # Vérification de la connexité
     for u, v in pairs:
@@ -129,4 +130,4 @@ if __name__ == "__main__":
     # Exemple guérir
     nmbr_pairs = 30
     pairs = generate_unique_pairs(list(G.nodes()), nmbr_pairs, directed=True)
-    print(guerir(pairs, 500, edges, 0.1, 0.00))
+    print(guerir(pairs, 500, edges, 0.1, 0.05))
