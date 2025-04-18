@@ -2,7 +2,7 @@ import pandas as pd
 import networkx as nx
 import random
 import numpy as np
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import data_processing as data_processing
 
 
@@ -12,6 +12,7 @@ def evaluate(solution, J, C, P,penalty=1e6):
     pénalisation locale pour les trajets impossibles.
     """
     G = nx.DiGraph([(start, end, {"weight": P[(start, end)]}) for start, end in solution])
+    penalty_cost = 0
 
     # Construction des chemins les plus courts par source, avec gestion d'échec
     shortest_paths = {}
@@ -27,32 +28,31 @@ def evaluate(solution, J, C, P,penalty=1e6):
         if dest in shortest_paths.get(src, {}):
             total_distance += shortest_paths[src][dest]
         else:
-            total_distance += penalty  # pénalisation du trajet manquant
+            penalty_cost+=penalty  # pénalisation du trajet manquant
 
-    return total_distance / len(J) + C * len(solution)
+    return total_distance / len(J) + C * len(solution) + penalty_cost
 
 
 def generate_initial_population(pop_size, P):
+    """
+    Génération de la population initiale : échantillonne aléatoirement des arêtes.
+    """
     return [random.sample(P, random.randint(len(P)//4, len(P))) for i in range(pop_size)]
+
 
 
 
 
 def crossover(parent1, parent2):
     """
-    Croisement à deux points : prend un segment du parent2 et le réinsère dans parent1.
+    Croisement un point : combine le début de parent1 avec la fin de parent2,
+    en évitant les doublons.
     """
-    if len(parent1) < 2 or len(parent2) < 2:
-        return parent1.copy()
-
-    idx1 = random.randint(0, min(len(parent1), len(parent2)) - 2)
-    idx2 = random.randint(idx1 + 1, min(len(parent1), len(parent2)) - 1)
-
-    segment = parent2[idx1:idx2]
-    child = [e for e in parent1 if e not in segment]
-    child[idx1:idx1] = segment
-    return list(dict.fromkeys(child))  # Évite les doublons
-
+    split_point = random.randint(1, min(len(parent1), len(parent2)) - 1)
+    part1 = parent1[:split_point]
+    part2 = [e for e in parent2[split_point:] if e not in part1]
+    child = part1 + part2
+    return child
 
 def mutate(individual, P, mutation_rate=0.1):
     """
@@ -68,7 +68,12 @@ def mutate(individual, P, mutation_rate=0.1):
                 individual.append(random.choice(remaining))
     return individual
 
+
+
 def tournament_selection(population, scores, k=5):
+    """
+    Sélection par tournoi : choisit k individus au hasard et retourne le meilleur.
+    """
     selected = random.sample(list(zip(population, scores)), k)
     selected.sort(key=lambda x: x[1])
     return selected[0][0]
@@ -81,7 +86,8 @@ def genetic_algorithm(P, J, C, edges, generations=200, pop_size=100):
     """
     population = generate_initial_population(pop_size, P)
     best_scores = []
-
+    same_solution = 0
+    current_best = 0
     for gen in range(generations):
 
         fitnesses_with_individuals = [
@@ -107,6 +113,15 @@ def genetic_algorithm(P, J, C, edges, generations=200, pop_size=100):
 
         population = top + children
         best_scores.append(scores[0])
+        # Vérification de la stagnation
+        if scores[0] == current_best:
+            same_solution += 1
+        else:
+            same_solution = 0
+            current_best = scores[0]
+        if same_solution > 20:
+            print("Stagnation détectée, arrêt de l'algorithme.")
+            break
 
     # Sélection finale du meilleur
     best = population[0]

@@ -1,11 +1,11 @@
-import src.optimisation as optimisation 
+import optimisation as optimisation 
 import data_processing as data_processing
 import distance as distance
 import unittest
 import networkx as nx
 import csv
 import pandas as pd
-from src.distance import distance
+from distance import distance
 import time
 import pandas as pd
 import random
@@ -188,21 +188,6 @@ class TestResolution(unittest.TestCase):
         start = time.time()       
         self.assertEqual(test_optimality(), 450000)
         print(f"Test with C = 50000 and 1 pair in {round(time.time()-start, 4)} seconds")
-
-
-
-
-
-        # start = time.time()
-        # result2, sum2 = test_bcp_bcp(C=1000)
-        #self.assertAlmostEqual(result2, sum2)
-        #print(f"Test with C = 0 and 200 pairs in {round(time.time()-start, 4)} seconds")
-        
-        # start = time.time()
-        # result2 = test_bcp_bcp_bcp(C=0)
-        #self.assertAlmostEqual(result2, sum2)
-        # print(f"Test with C = 0 and 500 pairs in {round(time.time()-start, 4)} seconds")
-        
 
 
 

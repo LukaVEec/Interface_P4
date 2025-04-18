@@ -6,11 +6,11 @@ import data_processing
 
 def plot_network(G, airports_csv="airports.csv"):
     """
-    Plots the network on a flat map using Cartopy.
+    Plot le réseau sur une carte du monde
 
     Inputs:
-        - G: a networkx graph where nodes are 3-letter IATA airport codes.
-        - airports_csv: path to the CSV file containing airport data (with columns: ID, latitude, longitude).
+        - G: un graphe networkx.
+        - airports_csv: fichiers contenant les informations de tous les aéroports.
     """
     # Charger les données d’aéroports
     airport_data = pd.read_csv(airports_csv)

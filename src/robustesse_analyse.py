@@ -7,7 +7,7 @@ import data_processing as data_processing
 import optimisation as optimisation
 import pygad
 import genetique 
-import test_pygad
+import pygad_library as pygad_library
 import time
 import robustesse_prev
 import test_rob_prev

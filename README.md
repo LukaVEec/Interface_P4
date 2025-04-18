@@ -71,7 +71,7 @@ Crée un graphe networkx à partir des fichiers du projet.
 - airports.csv
 - pre_existing_routes.csv
 
-### test_pygad.py
+### pygad_library.py
 
 Implémentation de l'algorithme génétique utilisant la librairie pygad. Encore une fois cette implémentation n'étant pas celle retenue, il n'est pas nécessaire pour le projet.
 

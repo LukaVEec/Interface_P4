@@ -11,6 +11,9 @@ import genetique
 
 
 def build_graph(solution, P):
+    """
+    Construis la solution en un graphe networkx à partir de la solution de PyGAD
+    """
     G = nx.DiGraph()
     for i, bit in enumerate(solution):
         if bit == 1:
@@ -20,6 +23,9 @@ def build_graph(solution, P):
 
 
 def new_network(airports, pre_existing_routes, J, C):
+    """
+    Optimisation de la connectivité d'un réseau de transport aérien en utilisant un algorithme génétique généré vie PyGAD.
+    """
     G, P_edges = data_processing.data_processing(airports, pre_existing_routes)
     P = []
     for start, end in P_edges.keys():

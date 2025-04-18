@@ -4,7 +4,10 @@ import matplotlib.pyplot as plt
 from pyomo.environ import *
 import builtins
 
-def resolution(G, pairs_to_connect, edges, C):    
+def resolution(G, pairs_to_connect, edges, C):
+    """
+    Resolution du problème d'optimisation exacte du nouveau réseau aérien
+    """    
     
     # Création du modèle
     model = ConcreteModel()
