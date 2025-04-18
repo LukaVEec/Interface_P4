@@ -148,9 +148,9 @@ if __name__ == "__main__":
     pairs = generate_unique_pairs(list(G.nodes()), nmbr_pairs, directed=True)
 
     # Exemple prévenir
-    print(prevenir(pairs, 500, edges, 50, [], 0))
+    print(prevenir(pairs, 500, edges, 50, pairs[:4], 5))
 
     # Exemple guérir
     nmbr_pairs = 30
-    pairs = generate_unique_pairs(list(G.nodes()), nmbr_pairs, directed=True)
+    # pairs = generate_unique_pairs(list(G.nodes()), nmbr_pairs, directed=True)
     print(guerir(pairs, 500, edges, 0.1, 0.05))
